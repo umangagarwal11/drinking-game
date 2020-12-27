@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Drinking Game</title>
+  </head>
+  <body>
+    <h1>Hello there</h1>
+    <button type="button" name="button" id="starter">Play!!</button>
+
+    <script type="text/javascript">
+      document.getElementById("starter").addEventListener('click',(e) => {
+        e.preventDefault();
+        window.location.href="/play";
+      });
+    </script>
+  </body>
+</html>
