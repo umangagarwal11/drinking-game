@@ -17,7 +17,7 @@ app.use(express.static('public'));
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended: false}));
 
-app.use("/peerjs", peerServer)
+app.use("/play/peerjs", peerServer)
 
 app.get("/", (req,res) => {
   res.render("index");
