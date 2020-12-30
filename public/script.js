@@ -39,7 +39,7 @@ navigator.mediaDevices.getUserMedia({
     $('.messages').append(`<li class = "message"><b>${sender}</b><br>${message}</li>`);
   });
 
-  let leave = $('.leave_meeting');
+  let leave = $('.exit');
   leave.on('click',(e) => {
     socket.disconnect(0);
     window.location.href="../../";
