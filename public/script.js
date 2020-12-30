@@ -41,6 +41,7 @@ navigator.mediaDevices.getUserMedia({
 
   let leave = $('.leave_meeting');
   leave.on('click',(e) => {
+    socket.disconnect(0);
     window.location.href="../../";
   })
 
