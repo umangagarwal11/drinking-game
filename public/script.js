@@ -6,6 +6,12 @@ const socket = io('/')
 const videoGrid = document.getElementById('video-grid');
 
 var peer = new Peer();
+const backup = ['Eat something and then talk with your mouth full','Drink a glass of wine in less than 15 seconds','Brush the teeth of the person sitting next to you',
+              'Stuff ice inside your bra and leave it there for 60 seconds','Sit on the lap of a guy for 10 minutes','Shave the legs of a man',
+              'Apply peanut butter to your face','Fill your mouth with water and try singing a song','Call up your crush and declare your love for him',
+              'Striptease for thirty whole seconds','Make an obscene phone call to a random number','Remove the socks of a person sitting next to you with your teeth',
+              'Eat a raw egg with chocolate',' Bark like a dog'];
+var dares = [...backup];
 
 let myVideoStream;
 let user;
@@ -32,11 +38,20 @@ navigator.mediaDevices.getUserMedia({
   let text = $('.card_flip');
 
   text.on('click',(e) => {
-    socket.emit('message', text.val(), user);
+    socket.emit('message', Math.floor(Math.random() * dares.length), user);
   });
 
   socket.on('createMessage', (message, sender) => {
-    $('.messages').append(`<li class = "message"><b>${sender}</b><br>${message}</li>`);
+    if(dares.length === 0){
+      dares = [...backup];
+    }
+    document.querySelector('.messages').innerHTML=`<div class = "message">
+                                                        <b>${sender} has to:</b><br>
+                                                        <div class="card" style="background:#000; color:#cc00cc; height:80%; margin:10% 0; text-align:justify; padding:40% 5%;">
+                                                            ${dares[message]} or take a shot!
+                                                        </div>
+                                                   </div>`;
+    dares.splice(message,1);
   });
 
   let leave = $('.exit');
@@ -52,7 +67,10 @@ socket.on('user-disconnected', userId => {
 })
 
 peer.on('open', id => {
-  user=id;
+  user=prompt("Please enter a nickname","Example: Jon Doe");
+  if(user == null || user == "Example: Jon Doe"){
+    user=id;
+  }
   socket.emit('join-room', ROOM_ID, id);
 });
 
