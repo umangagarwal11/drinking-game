@@ -1,9 +1,9 @@
 # drinking-game
 
-<b>To install and run after cloning:<b>
-In the project directory, you can run:
+**To install and run after cloning** you can run:
 
 ```npm install```
+
 ```npm start```
 
 Runs the app in the development mode.
